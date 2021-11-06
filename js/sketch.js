@@ -4,7 +4,7 @@ const res = 100;
 const nRows = nPixelsRow / res;
 const nCols = nPixelsCol / res;
 const nColors = getRandomInt(2, 7);
-const colorRule = getRandomInt(2, nColors + 1);
+const colorRule = getRandomInt(1, nColors + 1);
 const palette = generatePalette(nColors, colorRule);
 
 function getRandomInt(min, max, allowZero = true) {
@@ -31,9 +31,9 @@ function generatePalette(
       // hIdx will be the index of the color which will have a repeated hue
       let hIdx = getRandomInt(0, colorRule);
       // sDelta is the change to the saturation. Either increase or decrease by 10, 20, or 30
-      let sDelta = 10 * getRandomInt(-4, 4, false);
+      let sDelta = 20 * getRandomInt(-2, 3, false);
       // bDelta is the change to the saturation. Either increase or decrease by 10, 20, or 30
-      let bDelta = 10 * getRandomInt(-4, 4, false);
+      let bDelta = 20 * getRandomInt(-2, 3, false);
       // 
       colors[i] = [colors[hIdx][0], s + sDelta, b + bDelta];
     } else {
@@ -57,10 +57,21 @@ function draw() {
   background(220);
   for (let y = 0; y < nRows; y++) {
     for (let x = 0; x < nCols; x++) {
+      let tilePts = [
+        x * res, y * res, x * res + res, y * res + res
+      ] 
       let color = palette[getRandomInt(0, nColors)];
       noStroke();
       fill(color);
-      rect(x * res, y * res, res, res);
+      rect(tilePts[0], tilePts[1], res, res);
+      // let val = Math.randow();
+      // let color2 = palette[getRandomInt(0, nColors)];
+      // fill(color2);
+      // switch (true) {
+      //   // Fill square with upper left triangle
+      //   case val < 0.2:
+
+      // }
     }
   }
 }
