@@ -6,7 +6,8 @@ const nCols = nPixelsCol / res;
 const nColors = getRandomInt(2, 7);
 const colorRule = getRandomInt(1, nColors + 1);
 const palette = generatePalette(nColors, colorRule);
-let textMask= 'DC';
+let textMask = 'DC';
+// let textMask = undefined;
 
 function getRandomInt(min, max, allowZero = true) {
   min = Math.ceil(min);
@@ -61,36 +62,36 @@ function draw() {
     text(textMask, Math.floor(width / 2), Math.floor(height / 2));
     drawingContext.clip();
   }
-  fill(255, 0, 0);
-  rect(0, 0, weight, height);
-  for (let y = 0; y < nRows; y++) {
-    for (let x = 0; x < nCols; x++) {
-      // Points around the tile moving clockwise starting at top left
-      let tilePtsX = [x * res, x * res + res, x * res + res, x * res];
-      let tilePtsY = [y * res, y * res, y * res + res, y * res + res]; 
-      // Get color for tile square
-      let color = palette[getRandomInt(0, nColors)];
-      noStroke();
-      fill(color);
-      // Draw tile
-      rect(tilePtsX[0], tilePtsY[0], res, res);
-      // Get value that will decide if another shape is drawn on tile
-      let caseVal = Math.random();
-      // Choose color for additional shape
-      let color2 = palette[getRandomInt(0, nColors)];
-      fill(color2);
-      if (caseVal < 0.2) {
-        // Create array to hold triangle points (x & y)
-        let triPts = [];
-        // Pick a number that represents the tile corner to start the triangle (0 - 3 clockwise, 0 = top left) & determine the orientation of the triangle drawn
-        let triStartPt = getRandomInt(0, 4);
-        for (let i = 0; i < 3; i++) {
-          // Modulus operator makes any number above 3 (max index of tilePtsX and tilePtsY) wrap back around to 0 for when triStartPt is not 0 or 1
-          triPts.push(tilePtsX[(triStartPt + i) % 4]);
-          triPts.push(tilePtsY[(triStartPt + i) % 4]);
-        }
-        triangle.apply(null, triPts);
-      }
-    }
-  }
+  fill(180, 100, 100);
+  rect(0, 0, width, height);
+  // for (let y = 0; y < nRows; y++) {
+  //   for (let x = 0; x < nCols; x++) {
+  //     // Points around the tile moving clockwise starting at top left
+  //     let tilePtsX = [x * res, x * res + res, x * res + res, x * res];
+  //     let tilePtsY = [y * res, y * res, y * res + res, y * res + res]; 
+  //     // Get color for tile square
+  //     let color = palette[getRandomInt(0, nColors)];
+  //     noStroke();
+  //     fill(color);
+  //     // Draw tile
+  //     rect(tilePtsX[0], tilePtsY[0], res, res);
+  //     // Get value that will decide if another shape is drawn on tile
+  //     let caseVal = Math.random();
+  //     // Choose color for additional shape
+  //     let color2 = palette[getRandomInt(0, nColors)];
+  //     fill(color2);
+  //     if (caseVal < 0.2) {
+  //       // Create array to hold triangle points (x & y)
+  //       let triPts = [];
+  //       // Pick a number that represents the tile corner to start the triangle (0 - 3 clockwise, 0 = top left) & determine the orientation of the triangle drawn
+  //       let triStartPt = getRandomInt(0, 4);
+  //       for (let i = 0; i < 3; i++) {
+  //         // Modulus operator makes any number above 3 (max index of tilePtsX and tilePtsY) wrap back around to 0 for when triStartPt is not 0 or 1
+  //         triPts.push(tilePtsX[(triStartPt + i) % 4]);
+  //         triPts.push(tilePtsY[(triStartPt + i) % 4]);
+  //       }
+  //       triangle.apply(null, triPts);
+  //     }
+  //   }
+  // }
 }
